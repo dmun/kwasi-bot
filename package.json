@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/davidvanmunster/kwasi-bot/issues"
   },
-  "homepage": "https://github.com/davidvanmunster/kwasi-bot#readme"
+  "homepage": "https://github.com/davidvanmunster/kwasi-bot#readme",
+  "dependencies": {
+    "properties-reader": "^1.0.0"
+  }
 }
