@@ -1,4 +1,6 @@
 //http://discordapp.com/oauth2/authorize?&client_id=697901929518334053&scope=bot&permissions=8
+//http://discordapp.com/oauth2/authorize?&client_id=698654524671524955&scope=bot&permissions=8
+
 var prefix = '$';
 
 const Discord = require('discord.js');
