@@ -31,6 +31,10 @@ client.on('message', msg => {
                 '\:white_large_square: \:white_large_square: \:white_large_square:\n');
         msg.channel.send(gameEmbed);
     }
+
+    if (msg.content === prefix + 'take') {
+        
+    }
 });
 
 
