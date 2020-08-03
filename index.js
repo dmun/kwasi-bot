@@ -39,6 +39,8 @@ client.on('message', (msg) => {
         msg.channel.send(gameEmbed)
     }
 
+    msg.member.hasPermission('MANAGE_MESSAGES')
+
     if (command === 'take') {
         if (!args.length) {
             msg.channel.send('No arguments provided.')
@@ -50,6 +52,11 @@ client.on('message', (msg) => {
     }
 
     if (command === 'clear') {
+        if (msg.member.hasPermission('MANAGE_MESSAGES')) {
+            msg.channel.send('Je mag dit niet doen stinkaap')
+            return
+        }
+        
         if (!args.length) {
             msg.channel.send('No arguments provided.')
         } else {
