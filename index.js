@@ -30,45 +30,47 @@ client.on('message', (msg) => {
         msg.reply('Hallo ik ben Kwasi!')
     }
 
-    if (command === 'bke') {
-        var gameEmbed = new Discord.MessageEmbed().setDescription(
-            ':white_large_square: :white_large_square: :white_large_square:\n' +
-                ':white_large_square: :white_large_square: :white_large_square:\n' +
-                ':white_large_square: :white_large_square: :white_large_square:\n'
-        )
-        msg.channel.send(gameEmbed)
-    }
+    // if (command === 'bke') {
+    //     var gameEmbed = new Discord.MessageEmbed().setDescription(
+    //         ':white_large_square: :white_large_square: :white_large_square:\n' +
+    //             ':white_large_square: :white_large_square: :white_large_square:\n' +
+    //             ':white_large_square: :white_large_square: :white_large_square:\n'
+    //     )
+    //     msg.channel.send(gameEmbed)
+    // }
 
-    msg.member.hasPermission('MANAGE_MESSAGES')
-
-    if (command === 'take') {
-        if (!args.length) {
-            msg.channel.send('No arguments provided.')
-        } else {
-            const mentioned = msg.mentions.users.first()
-            client.user.setAvatar(mentioned.avatarURL())
-            client.user.setUsername(mentioned.username())
-        }
-    }
+    // if (command === 'take') {
+    //     if (!args.length) {
+    //         msg.channel.send('No arguments provided.')
+    //     } else {
+    //         const mentioned = msg.mentions.users.first()
+    //         client.user.setAvatar(mentioned.avatarURL())
+    //         client.user.setUsername(mentioned.username())
+    //     }
+    // }
 
     if (command === 'clear') {
-        if (msg.member.hasPermission('MANAGE_MESSAGES')) {
-            msg.channel.send('Je mag dit niet doen stinkaap')
-            return
-        }
-        
-        if (!args.length) {
-            msg.channel.send('No arguments provided.')
+        if (!msg.member.hasPermission('MANAGE_MESSAGES')) {
+            msg.channel
+                .send('Je mag dit niet doen stinkaap')
+                .then(botmsg => {
+                    botmsg.delete({ timeout: 3000 })
+                })
+        } else if (!args.length) {
+            msg.channel
+                .send('No arguments provided.')
+                .then(botmsg => {
+                    botmsg.delete({ timeout: 3000 })
+                })
         } else {
             msg.channel.messages
                 .fetch({ limit: parseInt(args[0]) + 1 })
                 .then((messages) => {
                     msg.channel.bulkDelete(messages)
                 })
-
             msg.channel
                 .send(args[0] + ' messages have been removed!')
-                .then((botmsg) => {
+                .then(botmsg => {
                     botmsg.delete({ timeout: 3000 })
                 })
         }
