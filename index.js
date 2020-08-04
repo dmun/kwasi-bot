@@ -1,7 +1,7 @@
 //http://discordapp.com/oauth2/authorize?&client_id=697901929518334053&scope=bot&permissions=8
 //http://discordapp.com/oauth2/authorize?&client_id=698654524671524955&scope=bot&permissions=8
 
-var prefix = '$'
+var prefix = '-'
 
 require('dotenv').config()
 const Discord = require('discord.js')
@@ -30,27 +30,16 @@ client.on('message', (msg) => {
         msg.reply('Hallo ik ben Kwasi!')
     }
 
-    // if (command === 'bke') {
-    //     var gameEmbed = new Discord.MessageEmbed().setDescription(
-    //         ':white_large_square: :white_large_square: :white_large_square:\n' +
-    //             ':white_large_square: :white_large_square: :white_large_square:\n' +
-    //             ':white_large_square: :white_large_square: :white_large_square:\n'
-    //     )
-    //     msg.channel.send(gameEmbed)
-    // }
-
-    // if (command === 'take') {
-    //     if (!args.length) {
-    //         msg.channel.send('No arguments provided.')
-    //     } else {
-    //         const mentioned = msg.mentions.users.first()
-    //         client.user.setAvatar(mentioned.avatarURL())
-    //         client.user.setUsername(mentioned.username())
-    //     }
-    // }
+    console.log(parseInt(args[0]))
 
     if (command === 'clear') {
         if (!msg.member.hasPermission('MANAGE_MESSAGES')) {
+            msg.channel
+                .send('Je mag dit niet doen stinkaap')
+                .then(botmsg => {
+                    botmsg.delete({ timeout: 3000 })
+                })
+        } else if (!typeof(parseInt(args[0])) === 'number') {
             msg.channel
                 .send('Je mag dit niet doen stinkaap')
                 .then(botmsg => {
@@ -74,6 +63,10 @@ client.on('message', (msg) => {
                     botmsg.delete({ timeout: 3000 })
                 })
         }
+    }
+
+    if (command === 'amus') {
+
     }
 })
 
