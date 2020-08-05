@@ -1,13 +1,8 @@
-//http://discordapp.com/oauth2/authorize?&client_id=697901929518334053&scope=bot&permissions=8
-//http://discordapp.com/oauth2/authorize?&client_id=698654524671524955&scope=bot&permissions=8
-
-var prefix = '$'
+var prefix = '-'
 
 require('dotenv').config()
-const Discord = require('discord.js')
-const PropertiesReader = require('properties-reader')
-
 const token = process.env.TOKEN
+const Discord = require('discord.js')
 const client = new Discord.Client()
 
 client.on('ready', () => {
@@ -30,50 +25,47 @@ client.on('message', (msg) => {
         msg.reply('Hallo ik ben Kwasi!')
     }
 
-    // if (command === 'bke') {
-    //     var gameEmbed = new Discord.MessageEmbed().setDescription(
-    //         ':white_large_square: :white_large_square: :white_large_square:\n' +
-    //             ':white_large_square: :white_large_square: :white_large_square:\n' +
-    //             ':white_large_square: :white_large_square: :white_large_square:\n'
-    //     )
-    //     msg.channel.send(gameEmbed)
-    // }
-
-    // if (command === 'take') {
-    //     if (!args.length) {
-    //         msg.channel.send('No arguments provided.')
-    //     } else {
-    //         const mentioned = msg.mentions.users.first()
-    //         client.user.setAvatar(mentioned.avatarURL())
-    //         client.user.setUsername(mentioned.username())
-    //     }
-    // }
-
     if (command === 'clear') {
         if (!msg.member.hasPermission('MANAGE_MESSAGES')) {
             msg.channel
-                .send('Je mag dit niet doen stinkaap')
-                .then(botmsg => {
-                    botmsg.delete({ timeout: 3000 })
-                })
+                .send('je mag dit niet doen stinkaap')
+                .then(botmsg => botmsg.delete({ timeout: 3000 }))
+        } else if (isNaN(parseInt(args[0]))) {
+            msg.channel
+                .send('a domme hoer je moet cijfer doen')
+                .then(botmsg => botmsg.delete({ timeout: 3000 }))
         } else if (!args.length) {
             msg.channel
-                .send('No arguments provided.')
-                .then(botmsg => {
-                    botmsg.delete({ timeout: 3000 })
-                })
+                .send('zeg hoeveel berichtjes je wilt weg hebben')
+                .then(botmsg => botmsg.delete({ timeout: 3000 }))
         } else {
             msg.channel.messages
                 .fetch({ limit: parseInt(args[0]) + 1 })
-                .then((messages) => {
-                    msg.channel.bulkDelete(messages)
-                })
+                .then((messages) => msg.channel.bulkDelete(messages))
             msg.channel
-                .send(args[0] + ' messages have been removed!')
-                .then(botmsg => {
-                    botmsg.delete({ timeout: 3000 })
-                })
+                .send(args[0] + ' weg')
+                .then(botmsg => botmsg.delete({ timeout: 3000 }))
         }
+    }
+
+    if (command === 'amus') {
+        const channel = msg.member.voice.channel
+        if (channel === null) {
+            msg.channel
+                .send('je zit niet in channel bro')
+                .then(botmsg => botmsg.delete({ timeout: 3000 }))
+        } else if (!msg.member.hasPermission('MUTE_MEMBERS')) {
+            msg.channel
+                .send('mag niet')
+                .then(botmsg => botmsg.delete({ timeout: 3000 }))
+        } else {
+            const channelHasMute = typeof (channel.members.find(member => member.voice.serverMute === false)) === 'undefined'
+            channel.members.forEach(member => member.voice.setMute(!channelHasMute))
+            msg.channel
+                .send('toggle mute')
+                .then(botmsg => botmsg.delete({ timeout: 3000 }))
+        }
+        msg.delete()
     }
 })
 
