@@ -49,15 +49,18 @@ client.on('message', (msg) => {
     }
 
     if (command === 'amus') {
-        if (!msg.member.hasPermission('MUTE_MEMBERS')) {
+        const channel = msg.member.voice.channel
+        if (channel === null) {
+            msg.channel
+                .send('je zit niet in channel bro')
+                .then(botmsg => botmsg.delete({ timeout: 3000 }))
+        } else if (!msg.member.hasPermission('MUTE_MEMBERS')) {
             msg.channel
                 .send('mag niet')
                 .then(botmsg => botmsg.delete({ timeout: 3000 }))
         } else {
-            const members = msg.member.voice.channel.members
-            const channelHasMute = typeof (members.find(member => member.voice.serverMute === false)) === 'undefined'
-            console.log(channelHasMute)
-            members.forEach(member => member.voice.setMute(!channelHasMute))
+            const channelHasMute = typeof (channel.members.find(member => member.voice.serverMute === false)) === 'undefined'
+            channel.members.forEach(member => member.voice.setMute(!channelHasMute))
             msg.channel
                 .send('toggle mute')
                 .then(botmsg => botmsg.delete({ timeout: 3000 }))
