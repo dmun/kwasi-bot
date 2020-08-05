@@ -30,18 +30,16 @@ client.on('message', (msg) => {
         msg.reply('Hallo ik ben Kwasi!')
     }
 
-    console.log(parseInt(args[0]))
-
     if (command === 'clear') {
         if (!msg.member.hasPermission('MANAGE_MESSAGES')) {
             msg.channel
-                .send('Je mag dit niet doen stinkaap')
+                .send('je mag dit niet doen stinkaap')
                 .then(botmsg => {
                     botmsg.delete({ timeout: 3000 })
                 })
-        } else if (!typeof(parseInt(args[0])) === 'number') {
+        } else if (isNaN(parseInt(args[0]))) {
             msg.channel
-                .send('Je mag dit niet doen stinkaap')
+                .send('a domme hoer je moet cijfer doen')
                 .then(botmsg => {
                     botmsg.delete({ timeout: 3000 })
                 })
@@ -63,10 +61,6 @@ client.on('message', (msg) => {
                     botmsg.delete({ timeout: 3000 })
                 })
         }
-    }
-
-    if (command === 'amus') {
-
     }
 })
 
