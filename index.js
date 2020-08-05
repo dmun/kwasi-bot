@@ -62,6 +62,13 @@ client.on('message', (msg) => {
                 })
         }
     }
+
+    if (command === 'amus') {
+        const members = msg.member.voice.channel.members
+        const channelHasMute = typeof(members.find(member => member.voice.serverMute === false)) === 'undefined'
+        console.log(channelHasMute)
+        members.forEach(member => member.voice.setMute(!channelHasMute))
+    }
 })
 
 client.login(token)
