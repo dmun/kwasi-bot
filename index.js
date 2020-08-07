@@ -59,7 +59,7 @@ client.on('message', (msg) => {
                 .send('mag niet')
                 .then(botmsg => botmsg.delete({ timeout: 3000 }))
         } else {
-            const channelHasMute = typeof (channel.members.find(member => member.voice.serverMute === false)) === 'undefined'
+            const channelHasMute = typeof (channel.members.find(member => member.voice.serverMute === true)) !== 'undefined'
             channel.members.forEach(member => member.voice.setMute(!channelHasMute))
             msg.channel
                 .send('toggle mute')
