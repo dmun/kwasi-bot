@@ -18,6 +18,7 @@
   "homepage": "https://github.com/davidvanmunster/kwasi-bot#readme",
   "dependencies": {
     "discord.js": "^12.2.0",
+    "discord.js-commando": "github:discordjs/Commando",
     "properties-reader": "^1.0.0"
   },
   "devDependencies": {
