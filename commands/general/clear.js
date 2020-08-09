@@ -20,11 +20,12 @@ module.exports = class ClearCommand extends Command {
     }
 
     run(msg, { amount }) {
+        console.log(amount)
         msg.channel.messages
             .fetch({ limit: amount + 1 })
             .then(messages => msg.channel.bulkDelete(messages))
         msg.channel
-            .send(args[0] + ' weg')
+            .send(amount + ' weg')
             .then(botmsg => botmsg.delete({ timeout: 3000 }))
     }
 }

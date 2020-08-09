@@ -8,8 +8,7 @@ const path = require('path')
 
 const client = new CommandoClient({
     commandPrefix: '-',
-    owner: '157063395969990656',
-    invite: 'https://discord.com/oauth2/authorize?client_id=697901929518334053&scope=bot&permissions=8'
+    owner: '157063395969990656'
 })
 
 client.registry
