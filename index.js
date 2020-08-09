@@ -8,7 +8,8 @@ const path = require('path')
 
 const client = new CommandoClient({
     commandPrefix: '-',
-    owner: '157063395969990656'
+    owner: '157063395969990656',
+    unknownCommandResponse: false
 })
 
 client.registry
