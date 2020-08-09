@@ -15,12 +15,12 @@ module.exports = class ClearCommand extends Command {
                     prompt: 'Pass the amount of messages you want to remove.',
                     type: 'integer'
                 }
-            ]
+            ],
+            argsPromptLimit: 0
         })
     }
 
     run(msg, { amount }) {
-        console.log(amount)
         msg.channel.messages
             .fetch({ limit: amount + 1 })
             .then(messages => msg.channel.bulkDelete(messages))

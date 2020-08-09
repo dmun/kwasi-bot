@@ -20,6 +20,7 @@ module.exports = class MuteChannelCommand extends Command {
         } else {
             const channelHasMute = typeof channel.members.find( (member) => member.voice.serverMute === true) !== 'undefined'
             channel.members.forEach(member => member.voice.setMute(!channelHasMute))
+            msg.delete({ timeout: 3000 })
             msg.channel
                 .send('toggle mute')
                 .then((botmsg) => botmsg.delete({ timeout: 3000 }))
