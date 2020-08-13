@@ -1,4 +1,3 @@
-// require('dotenv').config()
 const { Command } = require('discord.js-commando')
 const https = require('https')
 const key = process.env.SPOONACULAR_KEY
