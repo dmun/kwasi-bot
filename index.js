@@ -1,8 +1,5 @@
-var prefix = '-'
-
 require('dotenv').config()
 const token = process.env.TOKEN
-const Discord = require('discord.js')
 const { CommandoClient } = require('discord.js-commando')
 const path = require('path')
 
@@ -26,9 +23,9 @@ client.on('ready', () => {
     console.log(`Connected as ${client.user.tag}`)
     client.user.setPresence({
         activity: {
-            name: 'IntelliJ IDEA',
+            name: 'IntelliJ IDEA'
         },
-        status: 'available',
+        status: 'available'
     })
 })
 

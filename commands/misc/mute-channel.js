@@ -11,19 +11,18 @@ module.exports = class MuteChannelCommand extends Command {
             userPermissions: ['MUTE_MEMBERS']
         })
     }
-    
+
     run(msg) {
         const channel = msg.member.voice.channel
         if (channel === null) {
-            msg.channel
-                .send('je zit niet in channel bro')
+            msg.channel.send(`You're not in a channel.`)
         } else {
-            const channelHasMute = typeof channel.members.find( (member) => member.voice.serverMute === true) !== 'undefined'
+            const channelHasMute = typeof channel.members.find( member => member.voice.serverMute === true) !== 'undefined'
             channel.members.forEach(member => member.voice.setMute(!channelHasMute))
             msg.delete({ timeout: 3000 })
             msg.channel
                 .send('toggle mute')
-                .then((botmsg) => botmsg.delete({ timeout: 3000 }))
+                .then(botmsg => botmsg.delete({ timeout: 3000 }))
         }
     }
 }
