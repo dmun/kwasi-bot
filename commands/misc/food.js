@@ -1,3 +1,4 @@
+const Discord = require('discord.js')
 const { Command } = require('discord.js-commando')
 const https = require('https')
 const key = process.env.SPOONACULAR_KEY
@@ -31,7 +32,11 @@ module.exports = class FoodCommand extends Command {
             resp.on('end', _ => {
                 const recipe = JSON.parse(data).recipes[0]
                 try {
-                    msg.channel.send(recipe.title)
+                    const embed = new Discord.MessageEmbed()
+                        .setTitle(recipe.title)
+                        .setURL(recipe.sourceUrl)
+                        .setImage(recipe.image)
+                    msg.channel.send(embed)
                 } catch {
                     msg.channel.send('Recipe could not be found. 😔')
                 }
