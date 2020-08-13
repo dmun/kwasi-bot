@@ -15,7 +15,7 @@ module.exports = class MuteChannelCommand extends Command {
     run(msg) {
         const channel = msg.member.voice.channel
         if (channel === null) {
-            msg.channel.send('je zit niet in channel bro')
+            msg.channel.send(`You're not in a channel.`)
         } else {
             const channelHasMute = typeof channel.members.find( member => member.voice.serverMute === true) !== 'undefined'
             channel.members.forEach(member => member.voice.setMute(!channelHasMute))

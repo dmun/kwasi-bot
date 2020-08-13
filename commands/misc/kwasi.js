@@ -12,6 +12,6 @@ module.exports = class KwasiCommand extends Command {
     }
 
     run(msg) {
-        return msg.reply('hallo ik ben kwasi?')
+        return msg.reply('Hallo ik ben kwasi?')
     }
 }
