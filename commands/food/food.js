@@ -7,7 +7,7 @@ module.exports = class FoodCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'food',
-            group: 'misc',
+            group: 'food',
             memberName: 'food',
             description: 'Kwasi shares random recipe(s).',
             args: [
@@ -42,6 +42,6 @@ module.exports = class FoodCommand extends Command {
                 }
             })
         })
-        .on('error', err => msg.channel.send('Something went from while fetching data from spoonacular API.'))
+        .on('error', err => msg.channel.send(`Uh oh! Kwasi's brain is not working!`))
     }
 }

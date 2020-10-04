@@ -13,7 +13,8 @@ client.registry
     .registerDefaultTypes()
     .registerGroups([
         ['general', 'General commands'],
-        ['misc', 'Miscellaneous commands']
+        ['misc', 'Miscellaneous commands'],
+        ['food', 'Food commands']
     ])
     .registerDefaultGroups()
     .registerDefaultCommands()
