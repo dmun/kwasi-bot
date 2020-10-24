@@ -27,7 +27,7 @@ client.on('ready', () => {
             name: 'IntelliJ IDEA'
         },
         status: 'available'
-    })
+    });
 })
 
 client.on('error', console.error)

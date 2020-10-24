@@ -1,3 +1,4 @@
+const { randomBytes } = require('crypto')
 const Discord = require('discord.js')
 const { Command } = require('discord.js-commando')
 const https = require('https')
@@ -12,8 +13,8 @@ module.exports = class FoodCommand extends Command {
             description: 'Kwasi shares random recipe(s).',
             args: [
                 {
-                    key: 'cuisine',
-                    prompt: 'Select a cuisine.',
+                    key: 'query',
+                    prompt: 'Provide a query.',
                     type: 'string',
                     default: 'african'
                 }
@@ -21,8 +22,10 @@ module.exports = class FoodCommand extends Command {
         })
     }
 
-    run(msg, { cuisine } ) {
-        https.get(`https://api.spoonacular.com/recipes/random?limitLicense=true&tags=${cuisine}&number=1&apiKey=${key}`, (resp) => {
+    run(msg, { query }) {
+        const offset = Math.floor(Math.random() * 990)
+
+        https.get(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${key}&offset=${offset}`, (resp) => {
             let data = '';
 
             resp.on('data', chunk => {
@@ -30,18 +33,18 @@ module.exports = class FoodCommand extends Command {
             })
 
             resp.on('end', _ => {
-                const recipe = JSON.parse(data).recipes[0]
+                const result = JSON.parse(data).results[0]
+
                 try {
                     const embed = new Discord.MessageEmbed()
-                        .setTitle(recipe.title)
-                        .setURL(recipe.sourceUrl)
-                        .setImage(recipe.image)
+                        .setTitle(result.title)
+                        .setImage(result.image)
                     msg.channel.send(embed)
                 } catch {
                     msg.channel.send('Recipe could not be found. 😔')
                 }
             })
         })
-        .on('error', err => msg.channel.send(`Uh oh! Kwasi's brain is not working!`))
+            .on('error', err => msg.channel.send(`Uh oh! Kwasi's brain is not working!`))
     }
 }
